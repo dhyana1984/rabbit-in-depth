@@ -34,4 +34,5 @@ for message_number in range(0, 10):
                                opinionated=True)
     message.publish(exchange, 'example-routing-key')
 
+# message.publish(exchange, 'example-routing-key') is an async method and need to wait until completed executing
 input('wait')
