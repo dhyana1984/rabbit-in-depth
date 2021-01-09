@@ -2,6 +2,6 @@ import rabbitpy
 
 for iteration in range(15):
     rabbitpy.publish('amqp://guest:guest@localhost:5672/%2f',
-                     '', 'test-message', 'go')
+                     '', 'ad-example', 'go')
 rabbitpy.publish('amqp://guest:guest@localhost:5672/%2f',
-                 '', 'test-message', 'stop')
+                 '', 'ad-example', 'stop')
