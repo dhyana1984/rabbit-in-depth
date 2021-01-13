@@ -1,0 +1,3 @@
+If run
+    vagrant up secondary
+There will be error happened 
