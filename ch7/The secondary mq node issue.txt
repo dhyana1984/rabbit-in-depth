@@ -1,3 +1,106 @@
 If run
-    vagrant up secondary
-There will be error happened 
+
+vagrant up secondary
+
+There will be error like
+
+==> secondary: Running provisioner: shell...
+    secondary: Running: inline script
+    secondary: Stopping node rabbit@secondary ...
+    secondary: Error: unable to connect to node rabbit@secondary: nodedown
+    secondary:
+    secondary: DIAGNOSTICS
+    secondary: ===========
+    secondary:
+    secondary: attempted to contact: [rabbit@secondary]
+    secondary:
+    secondary: rabbit@secondary:
+    secondary:   * connected to epmd (port 4369) on secondary
+    secondary:   * epmd reports node 'rabbit' running on port 25672
+    secondary:   * TCP connection succeeded but Erlang distribution failed
+    secondary:   * suggestion: hostname mismatch?
+    secondary:   * suggestion: is the cookie set correctly?
+    secondary:
+    secondary: current node details:
+    secondary: - node name: 'rabbitmq-cli-1781@secondary'
+    secondary: - home dir: /var/lib/rabbitmq
+    secondary: - cookie hash: H6gXPXlo+GZy8pWfFX3Ynw==
+    secondary: Resetting node rabbit@secondary ...
+    secondary: Error: unable to connect to node rabbit@secondary: nodedown
+    secondary:
+    secondary: DIAGNOSTICS
+    secondary: ===========
+    secondary:
+    secondary: attempted to contact: [rabbit@secondary]
+    secondary:
+    secondary: rabbit@secondary:
+    secondary:   * connected to epmd (port 4369) on secondary
+    secondary:   * epmd reports node 'rabbit' running on port 25672
+    secondary:   * TCP connection succeeded but Erlang distribution failed
+    secondary:   * suggestion: hostname mismatch?
+    secondary:   * suggestion: is the cookie set correctly?
+    secondary:
+    secondary: current node details:
+    secondary: - node name: 'rabbitmq-cli-1832@secondary'
+    secondary: - home dir: /var/lib/rabbitmq
+    secondary: - cookie hash: H6gXPXlo+GZy8pWfFX3Ynw==
+    secondary: Clustering node rabbit@secondary with rabbit@primary ...
+    secondary: Error: unable to connect to node rabbit@secondary: nodedown
+    secondary:
+    secondary: DIAGNOSTICS
+    secondary: ===========
+    secondary:
+    secondary: attempted to contact: [rabbit@secondary]
+    secondary:
+    secondary: rabbit@secondary:
+    secondary:   * connected to epmd (port 4369) on secondary
+    secondary:   * epmd reports node 'rabbit' running on port 25672
+    secondary:   * TCP connection succeeded but Erlang distribution failed
+    secondary:   * suggestion: hostname mismatch?
+    secondary:   * suggestion: is the cookie set correctly?
+    secondary:
+    secondary: current node details:
+    secondary: - node name: 'rabbitmq-cli-1884@secondary'
+    secondary: - home dir: /var/lib/rabbitmq
+    secondary: - cookie hash: H6gXPXlo+GZy8pWfFX3Ynw==
+    secondary: Starting node rabbit@secondary ...
+    secondary: Error: unable to connect to node rabbit@secondary: nodedown
+    secondary:
+    secondary: DIAGNOSTICS
+    secondary: ===========
+    secondary:
+    secondary: attempted to contact: [rabbit@secondary]
+    secondary:
+    secondary: rabbit@secondary:
+    secondary:   * connected to epmd (port 4369) on secondary
+    secondary:   * epmd reports node 'rabbit' running on port 25672
+    secondary:   * TCP connection succeeded but Erlang distribution failed
+    secondary:   * suggestion: hostname mismatch?
+    secondary:   * suggestion: is the cookie set correctly?
+    secondary:
+    secondary: current node details:
+    secondary: - node name: 'rabbitmq-cli-1935@secondary'
+    secondary: - home dir: /var/lib/rabbitmq
+    secondary: - cookie hash: H6gXPXlo+GZy8pWfFX3Ynw==
+The SSH command responded with a non-zero exit status. Vagrant
+assumes that this means the command failed. The output for this command
+should be in the log above. Please read the output to determine what
+went wrong.
+
+
+
+Solution as below
+1. Connect to secondary via ssh
+2. Check the process of RabbitMQ
+
+ps -ef | grep rabbitmq
+
+3. Kill the progress
+
+ps -ef | grep rabbitmq | grep -v grep | awk '{print $2}' | xargs kill -9
+
+4.Start the RabbitMQ server
+
+rabbitmq-server
+
+5. Run rabbitmqctl status successfully
